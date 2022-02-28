@@ -20,7 +20,7 @@ Installation
 Add to your pip requirements:
 
 ```
-git+https://github.com/Humanitec/django-oauth-toolkit-jwt#egg=django-oauth-toolkit-jwt
+git+https://github.com/toladata-software/django-oauth-toolkit-jwt#egg=django-oauth-toolkit-jwt
 ```
 
 Generate keys
