@@ -19,6 +19,7 @@ def load_requirements(load_dependency_links=False):
 
 
 setup(
+    name="django-oauth-toolkit-jwt",
     author=u'Rafael Muñoz Cárdenas',
     author_email='rafael@humanitec.com',
     install_requires=load_requirements(),
