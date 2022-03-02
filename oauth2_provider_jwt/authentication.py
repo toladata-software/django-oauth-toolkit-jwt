@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import get_user_model
-from django.utils.encoding import smart_text
 import jwt
 from rest_framework import exceptions
 from rest_framework.authentication import (
@@ -9,6 +8,9 @@ from rest_framework.authentication import (
 )
 
 from .utils import decode_jwt
+
+def smart_text(x):
+    return str(x)
 
 
 class JWTAuthentication(BaseAuthentication):
