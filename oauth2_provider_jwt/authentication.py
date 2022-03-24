@@ -98,7 +98,7 @@ class JWTAuthentication(BaseAuthentication):
 
         jwt_value = auth[1]
         if type(jwt_value) is bytes:
-            jwt_value = jwt_value.decode('utf-8')
+            jwt_value = jwt_value
         return jwt_value
 
     def _add_session_details(self, request, payload):

@@ -90,7 +90,7 @@ class EncodeJWTTest(PythonTestCase):
             {"typ": "JWT", "alg": "RS256"})
         payload += '=' * (-len(payload) % 4)  # add padding
         self.assertEqual(
-            json.loads(base64.b64decode(payload).decode("utf-8")),
+            json.loads(base64.b64decode(payload)),
             payload_in)
 
 

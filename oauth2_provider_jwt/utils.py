@@ -58,7 +58,7 @@ def decode_jwt(jwt_value):
         raise jwt.InvalidTokenError()
 
     payload_enc += '=' * (-len(payload_enc) % 4)  # add padding
-    payload = json.loads(base64.b64decode(payload_enc).decode("utf-8"))
+    payload = json.loads(base64.b64decode(payload_enc))
 
     public_key_name = 'JWT_PUBLIC_KEY_RSA_{}'.format(payload['iss'].upper())
     public_key = getattr(settings, public_key_name, None)

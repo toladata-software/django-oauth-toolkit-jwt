@@ -34,7 +34,7 @@ def get_basic_auth_header(user, password):
     user_pass = "{0}:{1}".format(user, password)
     auth_string = base64.b64encode(user_pass.encode("utf-8"))
     auth_headers = {
-        "HTTP_AUTHORIZATION": "Basic " + auth_string.decode("utf-8"),
+        "HTTP_AUTHORIZATION": "Basic " + auth_string,
     }
 
     return auth_headers
@@ -108,7 +108,7 @@ class PasswordTokenViewTest(TestCase):
             **auth_headers)
         self.assertEqual(response.status_code, 200)
 
-        content = json.loads(response.content.decode("utf-8"))
+        content = json.loads(response.content)
         self.assertEqual(content["token_type"], "Bearer")
         self.assertIn(type(content["access_token_jwt"]).__name__,
                       ('unicode', 'str'))
@@ -136,7 +136,7 @@ class PasswordTokenViewTest(TestCase):
             **auth_headers)
         self.assertEqual(response.status_code, 200)
 
-        content = json.loads(response.content.decode("utf-8"))
+        content = json.loads(response.content)
         self.assertEqual(content["token_type"], "Bearer")
         self.assertNotIn("access_token_jwt", content)
         self.assertEqual(content["scope"], "read write")
@@ -157,11 +157,11 @@ class PasswordTokenViewTest(TestCase):
         response = self.client.post(
             reverse("oauth2_provider_jwt:token"), data=token_request_data,
             **auth_headers)
-        content = json.loads(response.content.decode("utf-8"))
+        content = json.loads(response.content)
         access_token_jwt = content["access_token_jwt"]
         headers, payload, verify_signature = access_token_jwt.split(".")
         payload += '=' * (-len(payload) % 4)  # add padding
-        payload_dict = json.loads(base64.b64decode(payload).decode("utf-8"))
+        payload_dict = json.loads(base64.b64decode(payload))
         self.assertDictContainsSubset({'sub': 'unique-user'}, payload_dict)
 
     def test_refresh_token(self):
