@@ -3,4 +3,5 @@
 .tox
 *.egg-info
 .idea/
+.DS_Store
 
