@@ -37,7 +37,13 @@ class TokenView(views.TokenView):
 
     def post(self, request, *args, **kwargs):
         response = super(TokenView, self).post(request, *args, **kwargs)
-        content = str(response.content)
+        import sys
+        sys.stderr.write("************************\n")
+        sts.stderr.write(dir(response.content))
+        sys.stderr.write("************************\n")
+        sts.stderr.write(response.content)
+        sys.stderr.write("************************\n")
+        content = response.content
         if response.status_code == 200 and 'access_token' in content:
             if not TokenView._is_jwt_config_set():
                 logger.warning(
