@@ -39,9 +39,9 @@ class TokenView(views.TokenView):
         response = super(TokenView, self).post(request, *args, **kwargs)
         import sys
         sys.stderr.write("************************\n")
-        sys.stderr.write(dir(response.content))
+        sys.stderr.write(str(dir(response.content)))
         sys.stderr.write("************************\n")
-        sys.stderr.write(response.content)
+        sys.stderr.write(str(response.content))
         sys.stderr.write("************************\n")
         content = response.content
         if response.status_code == 200 and 'access_token' in content:
